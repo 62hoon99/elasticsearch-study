@@ -3,14 +3,22 @@ package com.elasticsearch.movie;
 import co.elastic.clients.elasticsearch._types.mapping.IndexOptions;
 import co.elastic.clients.elasticsearch._types.mapping.Property;
 import co.elastic.clients.elasticsearch.indices.CreateIndexRequest;
+import lombok.Getter;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Getter
 public class MovieDocument {
     private String movieCd;
     private String movieNm;
     private String movieNmEn;
+
+    public MovieDocument(String movieCd, String movieNm, String movieNmEn) {
+        this.movieCd = movieCd;
+        this.movieNm = movieNm;
+        this.movieNmEn = movieNmEn;
+    }
 
     public static CreateIndexRequest getCreateIndexRequest() {
         Map<String, Property> propertyMap = new HashMap<>();

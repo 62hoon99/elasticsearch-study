@@ -1,5 +1,6 @@
 package com.elasticsearch.movie;
 
+import co.elastic.clients.elasticsearch.core.BulkResponse;
 import co.elastic.clients.elasticsearch.indices.CreateIndexResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,13 @@ public class MovieController {
     @PostMapping("/mappings")
     public ResponseEntity<CreateIndexResponse> createMovieMappings() {
         CreateIndexResponse response = movieService.createMovieMappings();
+
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/bulk-indexing")
+    public ResponseEntity<BulkResponse> bulkIndexingMultipleDocuments() {
+        BulkResponse response = movieService.bulkIndexingMultipleDocuments();
 
         return ResponseEntity.ok(response);
     }
