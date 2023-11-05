@@ -20,6 +20,9 @@ public class MovieDocument {
         this.movieNmEn = movieNmEn;
     }
 
+    public MovieDocument() {
+    }
+
     public static CreateIndexRequest getCreateIndexRequest() {
         Map<String, Property> propertyMap = new HashMap<>();
         propertyMap.put("movieCd", Property.of(p -> p.keyword(k -> k.store(true).indexOptions(IndexOptions.Docs))));

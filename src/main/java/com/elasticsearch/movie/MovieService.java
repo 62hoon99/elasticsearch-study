@@ -2,6 +2,7 @@ package com.elasticsearch.movie;
 
 import co.elastic.clients.elasticsearch.core.BulkRequest;
 import co.elastic.clients.elasticsearch.core.BulkResponse;
+import co.elastic.clients.elasticsearch.core.GetResponse;
 import co.elastic.clients.elasticsearch.indices.CreateIndexResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MovieService {
 
-    private final ElasticsearchRepository elasticsearchRepository;
+    private final ElasticsearchRepository<MovieDocument> elasticsearchRepository;
 
     public CreateIndexResponse createMovieMappings() {
         return elasticsearchRepository.createIndex(MovieDocument.getCreateIndexRequest());
@@ -38,5 +39,9 @@ public class MovieService {
         });
 
         return elasticsearchRepository.save(br.build());
+    }
+
+    public MovieDocument findMovieDocument(String id) {
+        return elasticsearchRepository.findById("movie_java", id, MovieDocument.class);
     }
 }
