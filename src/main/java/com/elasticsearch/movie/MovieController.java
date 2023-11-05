@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/movies")
@@ -32,5 +34,14 @@ public class MovieController {
         MovieDocument movieDocument = movieService.findMovieDocument(id);
 
         return ResponseEntity.ok(movieDocument);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<MovieDocument>> findMovieNmByMovieCd(@RequestParam String movieCd,
+                                                                    @RequestParam int page,
+                                                                    @RequestParam int size) {
+        List<MovieDocument> movieCds = movieService.findMovieNmByMovieCd(movieCd, page, size);
+
+        return ResponseEntity.ok(movieCds);
     }
 }
