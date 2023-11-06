@@ -66,4 +66,19 @@ public class MovieElasticsearchRepository {
             throw new RuntimeException(e);
         }
     }
+
+    public SearchResponse<MovieDocument> search(String movieNm) {
+        try {
+            return esClient.search(s -> s
+                            .index("movie_java")
+                            .query(q -> q
+                                    .match(m -> m
+                                            .field("movieNm")
+                                            .query(movieNm)
+                                    ))
+                    , MovieDocument.class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

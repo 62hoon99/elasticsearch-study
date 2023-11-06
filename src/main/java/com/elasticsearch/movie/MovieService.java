@@ -50,4 +50,9 @@ public class MovieService {
         return elasticsearchRepository.search(movieCd, page, size).hits().hits()
                 .stream().map(Hit::source).collect(Collectors.toList());
     }
+
+    public List<MovieDocument> findMovieByMatchingQuery(String movieNm) {
+        return elasticsearchRepository.search(movieNm).hits().hits()
+                .stream().map(Hit::source).collect(Collectors.toList());
+    }
 }

@@ -44,4 +44,11 @@ public class MovieController {
 
         return ResponseEntity.ok(movieCds);
     }
+
+    @GetMapping("/match-query")
+    public ResponseEntity<List<MovieDocument>> findMovieByMatchingQuery(@RequestParam String movieNm) {
+        List<MovieDocument> movieDocuments = movieService.findMovieByMatchingQuery(movieNm);
+
+        return ResponseEntity.ok(movieDocuments);
+    }
 }
