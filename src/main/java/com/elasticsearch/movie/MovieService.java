@@ -24,7 +24,8 @@ public class MovieService {
         List<MovieDocument> movieDocuments = List.of(
                 new MovieDocument("20173732", "살아남은 아이", "Last Child"),
                 new MovieDocument("20184623", "바람난 이세돌2", "Windy Stone2"),
-                new MovieDocument("20174244", "버블 패밀리", "Family in the Bubble")
+                new MovieDocument("20174244", "버블 패밀리", "Family in the Bubble"),
+                new MovieDocument("20174245", "버블 패밀리2", "Family in the Bubble")
         );
 
         BulkRequest.Builder br = new BulkRequest.Builder();
