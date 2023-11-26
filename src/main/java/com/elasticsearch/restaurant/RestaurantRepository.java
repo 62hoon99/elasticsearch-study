@@ -102,7 +102,7 @@ public class RestaurantRepository {
             autoCompletions.forEach(autoCompletion -> {
                 br.operations(op -> op
                         .index(idx -> idx
-                                .index("auto_completion")
+                                .index("auto_completion2")
                                 .document(autoCompletion)
                         )
                 );

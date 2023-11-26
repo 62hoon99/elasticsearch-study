@@ -46,10 +46,10 @@ public class RestaurantService {
                 for (String description : descriptions) {
                     restaurantRepository.analyze(description).tokens().stream().map(AnalyzeToken::token).forEach(set::add);
                 }
-                List<AutoCompletion> autoCompletions = set.stream().map(AutoCompletion::new).collect(Collectors.toList());
-                restaurantRepository.bulkInsertAutoCompletion(autoCompletions);
-                log.info("insert i = {}", i);
             }
         }
+
+        List<AutoCompletion> autoCompletions = set.stream().map(AutoCompletion::new).collect(Collectors.toList());
+        restaurantRepository.bulkInsertAutoCompletion(autoCompletions);
     }
 }
