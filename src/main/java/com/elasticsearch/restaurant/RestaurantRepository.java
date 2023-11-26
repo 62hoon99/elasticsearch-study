@@ -40,7 +40,7 @@ public class RestaurantRepository {
             restaurants.forEach(restaurant -> {
                 br.operations(op -> op
                         .index(idx -> idx
-                                .index("restaurants")
+                                .index("restaurant")
                                 .document(restaurant)
                         )
                 );
@@ -55,7 +55,7 @@ public class RestaurantRepository {
     public SearchResponse<Restaurant> search(String query, int pageNumber, int pageSize) {
         try {
             return esClient.search(s -> s
-                            .index("restaurants")
+                            .index("restaurant")
                             .searchType(SearchType.DfsQueryThenFetch)
                             .query(Query.of(q -> q
                                     .multiMatch(v -> v
