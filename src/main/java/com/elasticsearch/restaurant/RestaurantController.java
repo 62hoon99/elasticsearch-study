@@ -1,10 +1,10 @@
 package com.elasticsearch.restaurant;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -22,5 +22,13 @@ public class RestaurantController {
         restaurantService.save(restaurants);
 
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/restaurants/search")
+    public ResponseEntity<Page<Restaurant>> saveRestaurants(@RequestParam(value = "q") String query,
+                                                            Pageable pageable) {
+        Page<Restaurant> response = restaurantService.search(query, pageable);
+
+        return ResponseEntity.ok(response);
     }
 }

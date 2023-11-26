@@ -13,6 +13,9 @@ public class Restaurant {
     private String city;
     private String description;
 
+    public Restaurant() {
+    }
+
     @Builder
     public Restaurant(String name, String category1, String category2, String category3, String state, String city, String description) {
         this.name = name;
