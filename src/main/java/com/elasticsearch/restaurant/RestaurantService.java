@@ -1,6 +1,7 @@
 package com.elasticsearch.restaurant;
 
 import co.elastic.clients.elasticsearch.core.SearchResponse;
+import co.elastic.clients.elasticsearch.core.search.CompletionSuggestOption;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import co.elastic.clients.elasticsearch.indices.analyze.AnalyzeToken;
 import lombok.RequiredArgsConstructor;
@@ -51,5 +52,15 @@ public class RestaurantService {
 
         List<AutoCompletion> autoCompletions = set.stream().map(AutoCompletion::new).collect(Collectors.toList());
         restaurantRepository.bulkInsertAutoCompletion(autoCompletions);
+    }
+
+    public List<String> findAutoCompletions(String query) {
+        return restaurantRepository.findAutoCompletions(query)
+                .suggest()
+                .get("keyword-suggest")
+                .stream()
+                .flatMap(autoCompletionSuggestion -> autoCompletionSuggestion.completion().options().stream())
+                .map(CompletionSuggestOption::text)
+                .collect(Collectors.toList());
     }
 }

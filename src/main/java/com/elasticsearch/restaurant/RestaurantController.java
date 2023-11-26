@@ -33,9 +33,17 @@ public class RestaurantController {
     }
 
     @PostMapping("/restaurants/auto-completion")
-    public ResponseEntity<List<String>> bulkInsertAutoCompletion() {
+    public ResponseEntity<Void> bulkInsertAutoCompletion() {
         restaurantService.bulkInsertAutoCompletion();
 
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/restaurants/auto-completion")
+    public ResponseEntity<List<String>> bulkInsertAutoCompletion(@RequestParam(value = "q") String query) {
+        List<String> response = restaurantService.findAutoCompletions(query);
+
+        return ResponseEntity.ok(response);
+    }
+
 }

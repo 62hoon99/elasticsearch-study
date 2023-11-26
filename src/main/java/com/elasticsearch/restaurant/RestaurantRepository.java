@@ -127,4 +127,22 @@ public class RestaurantRepository {
         }
     }
 
+    public SearchResponse<AutoCompletion> findAutoCompletions(String query) {
+        try {
+            SearchResponse<AutoCompletion> search = esClient.search(s -> s
+                            .index("auto_completion2")
+                            .suggest(suggest -> suggest
+                                    .suggesters("keyword-suggest", b -> b
+                                            .prefix(query)
+                                            .completion(c -> c
+                                                    .field("suggest"))))
+                            .explain(true)
+                    , AutoCompletion.class);
+
+            return search;
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
